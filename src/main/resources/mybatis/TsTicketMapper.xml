@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.eg.airadmindemo.mapper.TsTicketMapper">
+    <insert id="insTic">
+        insert into ts_ticket values(default,default)
+    </insert>
+
+    <select id="selTicId" resultType="int">
+        SELECT LAST_INSERT_ID()
+    </select>
+
+    <delete id="delTic">
+        delete from ts_ticket where ticket_id=#{0}
+    </delete>
+</mapper>

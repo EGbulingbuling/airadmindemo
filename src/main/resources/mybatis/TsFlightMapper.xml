@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.eg.airadmindemo.mapper.TsFlightMapper">
+    <resultMap id="FliMap" type="tsFlight">
+        <id column="ticket_id" property="ticketId"/>
+        <result column="flight_no" property="flightNo"/>
+        <result column="starttime" property="startTime"/>
+        <result column="start" property="start"/>
+        <result column="end" property="end"/>
+        <result column="price" property="price"/>
+        <result column="peo_num" property="peoNum"/>
+        <result column="endtime" property="endTime"/>
+        <result column="discount" property="discount"/>
+        <result column="start_city" property="startCity"/>
+        <result column="end_city" property="endCity"/>
+        <result column="aircraft_type" property="aircraftType"/>
+        <result column="air_company" property="airCompany"/>
+    </resultMap>
+    <select id="selFli" resultMap="FliMap">
+        select *
+        from ts_Flight
+        where start_city=#{0} and end_city=#{1} and peo_num>0
+        <if test="2!=null and 2!=''">
+            and startTime like #{2}"%"
+        </if>
+    </select>
+
+    <update id="updFliForBuy">
+        update ts_Flight
+        set peo_num=peo_num-1
+        where ticket_id=#{0}
+    </update>
+
+    <update id="udpFliForUndo">
+        update ts_Flight
+        set peo_num=peo_num+1
+        where ticket_id=#{0}
+    </update>
+</mapper>
