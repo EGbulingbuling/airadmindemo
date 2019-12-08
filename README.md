@@ -17,6 +17,7 @@ Druid | 数据库连接池  | [https://github.com/alibaba/druid](https://github.
 Thymeleaf | 模板引擎  | [http://www.thymeleaf.org/](http://www.thymeleaf.org/)
 Maven | 项目构建管理  | [http://maven.apache.org/](http://maven.apache.org/)
 Logback | 日志组件  | [http://logging.apache.org/log4j/1.2/](http://logback.qos.ch/)
+Redis | 分布式缓存数据库  | [https://redis.io/](https://redis.io/)
 
 #### 前端技术:
 技术 | 名称 | 官网
