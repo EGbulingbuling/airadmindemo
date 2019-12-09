@@ -17,7 +17,7 @@ Druid | 数据库连接池  | [https://github.com/alibaba/druid](https://github.
 Thymeleaf | 模板引擎  | [http://www.thymeleaf.org/](http://www.thymeleaf.org/)
 Maven | 项目构建管理  | [http://maven.apache.org/](http://maven.apache.org/)
 Logback | 日志组件  | [http://logging.apache.org/log4j/1.2/](http://logback.qos.ch/)
-Redis | 分布式缓存数据库  | [https://redis.io/](https://redis.io/)
+Redis | 缓存数据库  | [https://redis.io/](https://redis.io/)
 
 #### 前端技术:
 技术 | 名称 | 官网
@@ -52,8 +52,15 @@ jQuery | 函式库  | [http://jquery.com/](http://jquery.com/)
 
 ### 预览图
 ![login](https://raw.githubusercontent.com/EGbulingbuling/airadmindemo/master/demo_pictures/login.png)
+![index](https://raw.githubusercontent.com/EGbulingbuling/airadmindemo/master/demo_pictures/index.png)
+![modify_password](https://raw.githubusercontent.com/EGbulingbuling/airadmindemo/master/demo_pictures/modify_password.png)
+![query_flight](https://raw.githubusercontent.com/EGbulingbuling/airadmindemo/master/demo_pictures/query_flight.png)
+![buy_ticket](https://raw.githubusercontent.com/EGbulingbuling/airadmindemo/master/demo_pictures/buy_ticket.png)
+![accomplish_buy](https://raw.githubusercontent.com/EGbulingbuling/airadmindemo/master/demo_pictures/accomplish_buy.png)
+![query_my_order](https://raw.githubusercontent.com/EGbulingbuling/airadmindemo/master/demo_pictures/query_my_order.png)
 
 ### 数据模型
+![data_model](https://raw.githubusercontent.com/EGbulingbuling/airadmindemo/master/demo_pictures/data_model.png)
 
 ### 开发进度
 
