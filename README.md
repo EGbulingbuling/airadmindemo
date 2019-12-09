@@ -51,6 +51,7 @@ jQuery | 函式库  | [http://jquery.com/](http://jquery.com/)
 演示地址： [http://localhost:8080/login]
 
 ### 预览图
+![login](https://raw.githubusercontent.com/EGbulingbuling/airadmindemo/master/demo_pictures/login.png)
 
 ### 数据模型
 
