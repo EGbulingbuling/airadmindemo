@@ -8,6 +8,16 @@ public class TsTakeperson implements Serializable {
     private String idNumber;
     private String phone;
 
+    public TsTakeperson() {
+    }
+
+    public TsTakeperson(int takepersonId, String name, String idNumber, String phone) {
+        this.takepersonId = takepersonId;
+        this.name = name;
+        this.idNumber = idNumber;
+        this.phone = phone;
+    }
+
     public int getTakepersonId() {
         return takepersonId;
     }

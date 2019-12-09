@@ -5,5 +5,5 @@ import cn.eg.airadmindemo.pojo.TicketInfo;
 import java.util.List;
 
 public interface TicketInfoMapper {
-    List<TicketInfo> selTicInf(int userId);
+    List<TicketInfo> selTicInf(String username);
 }

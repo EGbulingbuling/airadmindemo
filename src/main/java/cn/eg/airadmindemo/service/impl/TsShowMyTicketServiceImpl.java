@@ -3,7 +3,7 @@ package cn.eg.airadmindemo.service.impl;
 import cn.eg.airadmindemo.mapper.TicketInfoMapper;
 import cn.eg.airadmindemo.mapper.UmUserMapper;
 import cn.eg.airadmindemo.pojo.TicketInfo;
-import cn.eg.airadmindemo.pojo.UmUser;
+import cn.eg.airadmindemo.util.CacheUtil;
 import cn.eg.airadmindemo.service.TsShowMyTicketService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +16,18 @@ import java.util.List;
 public class TsShowMyTicketServiceImpl implements TsShowMyTicketService {
     @Autowired
     private TicketInfoMapper ticketInfoMapper;
-    @Resource
-    private UmUserMapper umUserMapper;
+    @Autowired
+    private CacheUtil cacheUtil;
 
     @Override
     public List<TicketInfo> showTicketInfo() {
         String username= (String) SecurityUtils.getSubject().getPrincipal();
-        UmUser user =umUserMapper.selByUser(username);
-        List<TicketInfo> ticketInfos=ticketInfoMapper.selTicInf(user.getUserId());
+        List<TicketInfo> ticketInfos=cacheUtil.getTicketInfo(username);
+        if (ticketInfos!=null){
+            return ticketInfos;
+        }
+        ticketInfos=ticketInfoMapper.selTicInf(username);
+        cacheUtil.addTicketInfo(username,ticketInfos);
         return ticketInfos;
     }
 }

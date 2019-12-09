@@ -7,6 +7,15 @@ public class TsTicketUser implements Serializable {
     private int ticketId;
     private int userId;
 
+    public TsTicketUser() {
+    }
+
+    public TsTicketUser(int ticketUserId, int ticketId, int userId) {
+        this.ticketUserId = ticketUserId;
+        this.ticketId = ticketId;
+        this.userId = userId;
+    }
+
     public int getTicketUserId() {
         return ticketUserId;
     }

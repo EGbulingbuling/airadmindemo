@@ -2,6 +2,8 @@ package cn.eg.airadmindemo.service.impl;
 
 import cn.eg.airadmindemo.mapper.*;
 import cn.eg.airadmindemo.service.TsUndoTicketService;
+import cn.eg.airadmindemo.util.CacheUtil;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,8 @@ public class TsUndoTicketServiceImpl implements TsUndoTicketService {
     private TsTicketTakepersonMapper tsTicketTakepersonMapper;
     @Autowired
     private TsTicketUserMapper tsTicketUserMapper;
+    @Autowired
+    private CacheUtil cacheUtil;
 
     @Override
     @Transactional
@@ -51,6 +55,9 @@ public class TsUndoTicketServiceImpl implements TsUndoTicketService {
             row3 = tsFlightTicketMapper.delFliTic(ticketId);
             //删除机票
             row4 = tsTicketMapper.delTic(ticketId);
+
+            String username= (String) SecurityUtils.getSubject().getPrincipal();
+            cacheUtil.deleteTicketInfo(username);
         } catch (Exception e) {
             transactionManager.rollback(status);
             throw e;

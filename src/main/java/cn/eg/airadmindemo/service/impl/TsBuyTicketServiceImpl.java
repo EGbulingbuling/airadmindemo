@@ -4,6 +4,7 @@ package cn.eg.airadmindemo.service.impl;
 import cn.eg.airadmindemo.mapper.*;
 import cn.eg.airadmindemo.pojo.TsTakeperson;
 import cn.eg.airadmindemo.pojo.UmUser;
+import cn.eg.airadmindemo.util.CacheUtil;
 import cn.eg.airadmindemo.service.TsBuyTicketService;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class TsBuyTicketServiceImpl implements TsBuyTicketService {
     private TsTicketTakepersonMapper tsTicketTakepersonMapper;
     @Autowired
     private TsTicketUserMapper tsTicketUserMapper;
+    @Autowired
+    private CacheUtil cacheUtil;
     @Resource
     private UmUserMapper umUserMapper;
 
@@ -66,6 +69,9 @@ public class TsBuyTicketServiceImpl implements TsBuyTicketService {
             //插入机票用户
             row5 = addTicketUser(ticketId);
 
+            String username= (String) SecurityUtils.getSubject().getPrincipal();
+            cacheUtil.deleteTicketInfo(username);
+
         } catch (Exception e) {
             transactionManager.rollback(status);
             throw e;
@@ -76,7 +82,11 @@ public class TsBuyTicketServiceImpl implements TsBuyTicketService {
 
     private int addTicketUser(int ticketId) {
         String username= (String) SecurityUtils.getSubject().getPrincipal();
-        UmUser user =umUserMapper.selByUser(username);
+        UmUser user= cacheUtil.getUser(username);
+        if (user==null){
+            user=umUserMapper.selByUser(username);
+            cacheUtil.addUser(username,user);
+        }
         return tsTicketUserMapper.insTicUse(ticketId,user.getUserId());
     }
 
@@ -91,9 +101,21 @@ public class TsBuyTicketServiceImpl implements TsBuyTicketService {
         return tsFlightTicketMapper.insFliTic(flightId,ticketId);
     }
 
+    /**
+     *
+     * @param PersonName
+     * @param PersonId
+     * @param PersonPhone
+     * @return 如果存在该身份证号则返回takepersonId
+     */
     private int addTakeperson(String PersonName,String PersonId,String PersonPhone) {
-        TsTakeperson tsTakeperson =tsTakepersonMapper.selTakById(PersonId);
+        TsTakeperson tsTakeperson=cacheUtil.getTakeperson(PersonId);
         if (tsTakeperson!=null){
+            return tsTakeperson.getTakepersonId();
+        }
+        tsTakeperson =tsTakepersonMapper.selTakById(PersonId);
+        if (tsTakeperson!=null){
+            cacheUtil.addTakeperson(PersonId,tsTakeperson);
             return tsTakeperson.getTakepersonId();
         }else {
             tsTakepersonMapper.insTak(PersonName,PersonId,PersonPhone);

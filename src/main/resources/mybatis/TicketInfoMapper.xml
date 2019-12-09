@@ -29,6 +29,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         on ti.ticket_id=tt.ticket_id
         INNER JOIN ts_takeperson ta
         on tt.takeperson_id=ta.takeperson_id
-        where u.user_id=#{0}
+        where u.username=#{0}
     </select>
 </mapper>

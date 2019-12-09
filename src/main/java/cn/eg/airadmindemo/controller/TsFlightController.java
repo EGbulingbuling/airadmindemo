@@ -57,7 +57,7 @@ public class TsFlightController {
 
     @RequestMapping("/showMyTickets")
     @ResponseBody
-    public String showMyTickets(HttpSession session){
+    public String showMyTickets(){
         List<TicketInfo> ticketInfos=tsShowMyTicketService.showTicketInfo();
         String ticketInfoStr=JSON.toJSONString(ticketInfos);
         return ticketInfoStr;

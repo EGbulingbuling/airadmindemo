@@ -15,6 +15,22 @@ public class UmUser implements Serializable {
     private Date birth;
     private String email;
 
+    public UmUser() {
+    }
+
+    public UmUser(int userId, String userName, String password, String salt, String phone, String sex, String nickname, String address, Date birth, String email) {
+        this.userId = userId;
+        this.userName = userName;
+        this.password = password;
+        this.salt = salt;
+        this.phone = phone;
+        this.sex = sex;
+        this.nickname = nickname;
+        this.address = address;
+        this.birth = birth;
+        this.email = email;
+    }
+
     public int getUserId() {
         return userId;
     }
